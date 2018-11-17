@@ -1,0 +1,273 @@
+#import "NTVectorDataSource.h"
+#import "NTCacheTileDataSource.h"
+#import "NTOfflineNMLModelLODTreeDataSource.h"
+#import "NTBitmapOverlayRasterTileDataSource.h"
+#import "NTGDALRasterTileDataSource.h"
+#import "NTHTTPTileDataSource.h"
+#import "NTPersistentCacheTileDataSource.h"
+#import "NTOGRVectorDataBase.h"
+#import "NTPackageManagerTileDataSource.h"
+#import "NTTileDownloadListener.h"
+#import "NTTileDataSource.h"
+#import "NTCombinedTileDataSource.h"
+#import "NTOGRVectorDataSource.h"
+#import "NTOnlineNMLModelLODTreeDataSource.h"
+#import "NTMBTilesTileDataSource.h"
+#import "NTLocalVectorDataSource.h"
+#import "NTAssetTileDataSource.h"
+#import "NTNMLModelLODTreeDataSource.h"
+#import "NTMemoryCacheTileDataSource.h"
+#import "NTCartoOnlineTileDataSource.h"
+#import "NTMapEventListener.h"
+#import "NTRendererCaptureListener.h"
+#import "NTRedrawRequestListener.h"
+#import "NTMapRendererListener.h"
+#import "NTTileLayer.h"
+#import "NTVectorTileLayer.h"
+#import "NTVectorEditEventListener.h"
+#import "NTVectorElementEventListener.h"
+#import "NTClusteredVectorLayer.h"
+#import "NTCartoOnlineVectorTileLayer.h"
+#import "NTCartoVectorTileLayer.h"
+#import "NTLayer.h"
+#import "NTVectorTileEventListener.h"
+#import "NTRasterTileLayer.h"
+#import "NTNMLModelLODTreeEventListener.h"
+#import "NTNMLModelLODTreeLayer.h"
+#import "NTCartoOnlineRasterTileLayer.h"
+#import "NTRasterTileEventListener.h"
+#import "NTSolidLayer.h"
+#import "NTCartoOfflineVectorTileLayer.h"
+#import "NTTileLoadListener.h"
+#import "NTClusterElementBuilder.h"
+#import "NTVectorLayer.h"
+#import "NTUTFGridEventListener.h"
+#import "NTEditableVectorLayer.h"
+#import "NTTorqueTileLayer.h"
+#import "NTPackageManager.h"
+#import "NTCartoPackageManager.h"
+#import "NTPackageManagerListener.h"
+#import "NTLogEventListener.h"
+#import "NTAssetPackage.h"
+#import "NTZippedAssetPackage.h"
+#import "NTReverseGeocodingService.h"
+#import "NTTomTomOnlineGeocodingService.h"
+#import "NTMapBoxOnlineGeocodingService.h"
+#import "NTTomTomOnlineReverseGeocodingService.h"
+#import "NTOSMOfflineReverseGeocodingService.h"
+#import "NTMapBoxOnlineReverseGeocodingService.h"
+#import "NTGeocodingService.h"
+#import "NTPeliasOnlineReverseGeocodingService.h"
+#import "NTPackageManagerGeocodingService.h"
+#import "NTPackageManagerReverseGeocodingService.h"
+#import "NTOSMOfflineGeocodingService.h"
+#import "NTPeliasOnlineGeocodingService.h"
+#import "NTEPSG3857.h"
+#import "NTProjection.h"
+#import "NTVectorElementSearchService.h"
+#import "NTVectorTileSearchService.h"
+#import "NTFeatureCollectionSearchService.h"
+#import "NTMBVectorTileDecoder.h"
+#import "NTTorqueTileDecoder.h"
+#import "NTCartoVectorTileDecoder.h"
+#import "NTVectorTileDecoder.h"
+#import "NTAnimationStyle.h"
+#import "NTPointStyle.h"
+#import "NTGeometryCollectionStyle.h"
+#import "NTBalloonPopupStyle.h"
+#import "NTStyleBuilder.h"
+#import "NTLineStyle.h"
+#import "NTPolygonStyleBuilder.h"
+#import "NTLabelStyleBuilder.h"
+#import "NTStyle.h"
+#import "NTBalloonPopupStyleBuilder.h"
+#import "NTLineStyleBuilder.h"
+#import "NTMarkerStyleBuilder.h"
+#import "NTMarkerStyle.h"
+#import "NTAnimationStyleBuilder.h"
+#import "NTBillboardStyleBuilder.h"
+#import "NTPolygon3DStyle.h"
+#import "NTPointStyleBuilder.h"
+#import "NTPolygonStyle.h"
+#import "NTPopupStyle.h"
+#import "NTGeometryCollectionStyleBuilder.h"
+#import "NTPopupStyleBuilder.h"
+#import "NTBillboardStyle.h"
+#import "NTTextStyle.h"
+#import "NTLabelStyle.h"
+#import "NTTextStyleBuilder.h"
+#import "NTPolygon3DStyleBuilder.h"
+#import "NTLicenseManagerListener.h"
+#import "NTPolygonGeometry.h"
+#import "NTVectorTileFeatureCollection.h"
+#import "NTDouglasPeuckerGeometrySimplifier.h"
+#import "NTFeature.h"
+#import "NTMultiPolygonGeometry.h"
+#import "NTMultiPointGeometry.h"
+#import "NTFeatureCollection.h"
+#import "NTGeometrySimplifier.h"
+#import "NTVectorTileFeature.h"
+#import "NTGeometry.h"
+#import "NTLineGeometry.h"
+#import "NTMultiGeometry.h"
+#import "NTMultiLineGeometry.h"
+#import "NTPointGeometry.h"
+#import "NTValhallaOfflineRoutingService.h"
+#import "NTPackageManagerValhallaRoutingService.h"
+#import "NTCartoOnlineRoutingService.h"
+#import "NTRoutingService.h"
+#import "NTPackageManagerRoutingService.h"
+#import "NTOSRMOfflineRoutingService.h"
+#import "NTValhallaOnlineRoutingService.h"
+#import "NTCartoVisBuilder.h"
+#import "NTPolygon.h"
+#import "NTLabel.h"
+#import "NTPoint.h"
+#import "NTCustomPopup.h"
+#import "NTGeometryCollection.h"
+#import "NTText.h"
+#import "NTPopup.h"
+#import "NTMarker.h"
+#import "NTCustomPopupHandler.h"
+#import "NTBalloonPopup.h"
+#import "NTNMLModel.h"
+#import "NTBillboard.h"
+#import "NTLine.h"
+#import "NTVectorElement.h"
+#import "NTPolygon3D.h"
+static void initNTPolymorphicClasses() {
+  [NTVectorDataSource class];
+  [NTCacheTileDataSource class];
+  [NTOfflineNMLModelLODTreeDataSource class];
+  [NTBitmapOverlayRasterTileDataSource class];
+  [NTHTTPTileDataSource class];
+  [NTPersistentCacheTileDataSource class];
+  [NTPackageManagerTileDataSource class];
+  [NTTileDownloadListener class];
+  [NTTileDataSource class];
+  [NTCombinedTileDataSource class];
+  [NTOnlineNMLModelLODTreeDataSource class];
+  [NTMBTilesTileDataSource class];
+  [NTLocalVectorDataSource class];
+  [NTAssetTileDataSource class];
+  [NTNMLModelLODTreeDataSource class];
+  [NTMemoryCacheTileDataSource class];
+  [NTCartoOnlineTileDataSource class];
+  [NTMapEventListener class];
+  [NTRendererCaptureListener class];
+  [NTRedrawRequestListener class];
+  [NTMapRendererListener class];
+  [NTTileLayer class];
+  [NTVectorTileLayer class];
+  [NTVectorEditEventListener class];
+  [NTVectorElementEventListener class];
+  [NTClusteredVectorLayer class];
+  [NTCartoOnlineVectorTileLayer class];
+  [NTCartoVectorTileLayer class];
+  [NTLayer class];
+  [NTVectorTileEventListener class];
+  [NTRasterTileLayer class];
+  [NTNMLModelLODTreeEventListener class];
+  [NTNMLModelLODTreeLayer class];
+  [NTCartoOnlineRasterTileLayer class];
+  [NTRasterTileEventListener class];
+  [NTSolidLayer class];
+  [NTCartoOfflineVectorTileLayer class];
+  [NTTileLoadListener class];
+  [NTClusterElementBuilder class];
+  [NTVectorLayer class];
+  [NTUTFGridEventListener class];
+  [NTEditableVectorLayer class];
+  [NTTorqueTileLayer class];
+  [NTPackageManager class];
+  [NTCartoPackageManager class];
+  [NTPackageManagerListener class];
+  [NTLogEventListener class];
+  [NTAssetPackage class];
+  [NTZippedAssetPackage class];
+  [NTReverseGeocodingService class];
+  [NTTomTomOnlineGeocodingService class];
+  [NTMapBoxOnlineGeocodingService class];
+  [NTTomTomOnlineReverseGeocodingService class];
+  [NTOSMOfflineReverseGeocodingService class];
+  [NTMapBoxOnlineReverseGeocodingService class];
+  [NTGeocodingService class];
+  [NTPeliasOnlineReverseGeocodingService class];
+  [NTPackageManagerGeocodingService class];
+  [NTPackageManagerReverseGeocodingService class];
+  [NTOSMOfflineGeocodingService class];
+  [NTPeliasOnlineGeocodingService class];
+  [NTEPSG3857 class];
+  [NTProjection class];
+  [NTVectorElementSearchService class];
+  [NTVectorTileSearchService class];
+  [NTFeatureCollectionSearchService class];
+  [NTMBVectorTileDecoder class];
+  [NTTorqueTileDecoder class];
+  [NTCartoVectorTileDecoder class];
+  [NTVectorTileDecoder class];
+  [NTAnimationStyle class];
+  [NTPointStyle class];
+  [NTGeometryCollectionStyle class];
+  [NTBalloonPopupStyle class];
+  [NTStyleBuilder class];
+  [NTLineStyle class];
+  [NTPolygonStyleBuilder class];
+  [NTLabelStyleBuilder class];
+  [NTStyle class];
+  [NTBalloonPopupStyleBuilder class];
+  [NTLineStyleBuilder class];
+  [NTMarkerStyleBuilder class];
+  [NTMarkerStyle class];
+  [NTAnimationStyleBuilder class];
+  [NTBillboardStyleBuilder class];
+  [NTPolygon3DStyle class];
+  [NTPointStyleBuilder class];
+  [NTPolygonStyle class];
+  [NTPopupStyle class];
+  [NTGeometryCollectionStyleBuilder class];
+  [NTPopupStyleBuilder class];
+  [NTBillboardStyle class];
+  [NTTextStyle class];
+  [NTLabelStyle class];
+  [NTTextStyleBuilder class];
+  [NTPolygon3DStyleBuilder class];
+  [NTLicenseManagerListener class];
+  [NTPolygonGeometry class];
+  [NTVectorTileFeatureCollection class];
+  [NTDouglasPeuckerGeometrySimplifier class];
+  [NTFeature class];
+  [NTMultiPolygonGeometry class];
+  [NTMultiPointGeometry class];
+  [NTFeatureCollection class];
+  [NTGeometrySimplifier class];
+  [NTVectorTileFeature class];
+  [NTGeometry class];
+  [NTLineGeometry class];
+  [NTMultiGeometry class];
+  [NTMultiLineGeometry class];
+  [NTPointGeometry class];
+  [NTValhallaOfflineRoutingService class];
+  [NTPackageManagerValhallaRoutingService class];
+  [NTCartoOnlineRoutingService class];
+  [NTRoutingService class];
+  [NTPackageManagerRoutingService class];
+  [NTOSRMOfflineRoutingService class];
+  [NTValhallaOnlineRoutingService class];
+  [NTCartoVisBuilder class];
+  [NTPolygon class];
+  [NTLabel class];
+  [NTPoint class];
+  [NTCustomPopup class];
+  [NTGeometryCollection class];
+  [NTText class];
+  [NTPopup class];
+  [NTMarker class];
+  [NTCustomPopupHandler class];
+  [NTBalloonPopup class];
+  [NTNMLModel class];
+  [NTBillboard class];
+  [NTLine class];
+  [NTVectorElement class];
+  [NTPolygon3D class];
+}

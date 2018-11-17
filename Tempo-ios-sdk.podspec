@@ -16,8 +16,7 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => 'git@github.com:jesusgeographica/pruebaSDKObjC.git'}
   spec.source_files = 'TempoSDK/Classes/**/*'
   spec.requires_arc = true
-  spec.frameworks = ['GLKit', 'CartoMobileSDK']
-  spec.libraries = ['z', 'c++']
-  spec.dependency 'CartoMobileSDK', '4.1.4'
+  spec.frameworks = 'GLKit', 'CartoMobileSDK'
+  spec.libraries = 'z', 'c++'
 
 end
