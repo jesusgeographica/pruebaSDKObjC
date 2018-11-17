@@ -15,6 +15,7 @@ Pod::Spec.new do |spec|
   spec.author       = { 'Jesús Victorio' => 'jesus.victorio@geographica.gs' }
   spec.source       = { :git => 'git@github.com:jesusgeographica/pruebaSDKObjC.git'}
   spec.source_files = 'TempoSDK/Classes/**/*'
+  spec.ios.vendored_frameworks = 'Tempo-ios-sdk/Classes/CartoMobileSDK.framework'
   spec.requires_arc = true
   spec.frameworks = 'GLKit', 'CartoMobileSDK'
   spec.libraries = 'z', 'c++'
