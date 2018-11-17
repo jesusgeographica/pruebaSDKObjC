@@ -1,0 +1,9 @@
+site_name: Tempo Android SDK
+pages:
+  - Home: index.md
+  - API Reference:
+    - Template: reference/template.md
+theme: readthedocs
+use_directory_urls: false
+plugins:
+  - search
