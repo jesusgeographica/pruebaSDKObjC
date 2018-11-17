@@ -19,5 +19,8 @@ Pod::Spec.new do |spec|
   spec.frameworks = ['GLKit', 'CartoMobileSDK']
   spec.libraries = ['z', 'c++']
   spec.dependency 'CartoMobileSDK', '4.1.4'
+  spec.xcconfig = {
+    "FRAMEWORK_SEARCH_PATHS": "\"$(PODS_ROOT)/CartoMobileSDK/\""
+  }
 
 end
